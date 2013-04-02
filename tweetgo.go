@@ -38,7 +38,7 @@ func decodeTweet(conn *twitterstream.Connection, s socket) {
 				websocket.JSON.Send(s.conn, tweet)
 			}
 		} else {
-			log.Printf("Failed decoding tweet: %s", err)
+			//log.Printf("Failed decoding tweet: %s", err)
 			return
 		}
 	}

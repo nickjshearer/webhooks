@@ -33,9 +33,8 @@ func socketHandler(ws *websocket.Conn) {
 func decodeTweet(conn *twitterstream.Connection, s socket) {
 	for {
 		if tweet, err := conn.Next(); err == nil {
-			if tweet.Entities.Media != nil {
-				//log.Println("%s %s", tweet.User.ScreenName, tweet.Text)
-				log.Println(tweet.Entities.Media[0].MediaUrl)
+			if tweet.Entities.Media != nil && !tweet.Retweeted {
+				log.Printf("%s %s \n\n %s\n\n\n", tweet.IdString, tweet.User.ScreenName, tweet.Text)
 				websocket.JSON.Send(s.conn, tweet)
 			}
 		} else {
